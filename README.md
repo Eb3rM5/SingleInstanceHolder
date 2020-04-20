@@ -6,6 +6,15 @@
 - No using of *Sockets* or recurring to *native calls*.
 - Pass the program arguments of newly created instances to the one which is already running.
 
+### How it works
+A helper class named `InstanceHolderHelper` is the one which determines if an instance is already running.
+
+The method `createInstaceHandler` will look into a system temporary folder which name correspond an UID of the Main.class package location, and try to lock the `.lock` file. 
+
+If it's not locked, it'll create an instance of `InstanceHolderHelper`,  which through `FileSystemWatcher` will listen to the creation of any file into that temporary folder, reading them through `ObjectInputStream` to get the content (which will be String array of arguments).
+
+If it's locked, it'll create a file into the temporary folder and put into its content the arguments String array object through an `ObjectOuputStream`. The `FileSystemWatcher` of the already running instance will recognize the creation of this file and handle it there.
+
 ### Example
 Into the main method, create an `InstanceHolderHelper` through `InstanceHolderHelper.createInstanceHandler` passing the class object and the arguments. If an instance is already running, it'll return **null**.
 
