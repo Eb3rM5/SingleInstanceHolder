@@ -19,8 +19,8 @@ If it's locked, it'll create a file into the temporary folder and put into its c
 Into the main method, create an `InstanceHolderHelper` through `InstanceHolderHelper.createInstanceHandler` passing the class object and the arguments. If an instance is already running, it'll return **null**.
 
 To known when an instance is created and get its arguments, just set an `InstanceHandler` through `InstanceHolderHelper.setOnInstance`.
-
-    public class Main {
+```java
+public class Main {
 	
 		public static void main(String[] args) throws IOException {
 			
@@ -48,3 +48,4 @@ To known when an instance is created and get its arguments, just set an `Instanc
 		}
 	}
 
+```
